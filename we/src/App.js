@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
+import PlayerList from "./components/PlayerList/PlayerList";
+import "./App.css"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from 'react'
+
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentVideo: null
+    }
+    this.handleCurrentVideo = this.handleCurrentVideo.bind(this);
+  }
+
+  handleCurrentVideo = (val) => {
+    this.setState({ currentVideo: val.item })
+  }
+
+  render() {
+    return (
+      <div className="container-fluid">
+        <div className="row d-flex justify-content-center">
+
+          <VideoPlayer currentVideo={this.state.currentVideo} />
+          <div>
+            <PlayerList handleCurrentVideo={this.handleCurrentVideo} />
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
